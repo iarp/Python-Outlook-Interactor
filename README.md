@@ -8,7 +8,7 @@ I was using Outlook 2013/2016 but have tried running this on 2010 without errors
 
     o = Outlook()
 
-    folder_object = o.get_folder_by_name(('Outlook Data File', 'Forms'))
+    folder_object = o.get_folder_by_tree(('Outlook Data File', 'Forms'))
 
     # See the following link for available properties and methods.
     # https://msdn.microsoft.com/en-us/library/office/ff861332.aspx

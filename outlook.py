@@ -82,14 +82,14 @@ class Outlook:
     def get_folder_by_id(self, folder_id):
         return self.namespace.GetFolderFromID(folder_id)
 
-    def get_folder_by_name(self, wanted_folder_structure: [tuple, list]):
+    def get_folder_by_tree(self, wanted_folder_structure: [tuple, list]):
         """ Returns Folder object based on tuple or list of folder names
                 given single-tree style.
 
         Using the dict example found in self.get_folder_structure method,
             to obtain the Inbox you would do the following
 
-            o.get_folder_by_name(['Outlook Data File', 'Inbox'])
+            o.get_folder_by_tree(['Outlook Data File', 'Inbox'])
 
         """
 
@@ -147,7 +147,7 @@ class Outlook:
         if not found:
             raise FolderNotFoundException('Folder {} was not found in Outlook'.format(folder_name))
         elif found > 1:
-            raise TooManyFoldersFoundException('Folder {} was found more than once, use get_folder_by_name with tree.'.format(folder_name))
+            raise TooManyFoldersFoundException('Folder {} was found more than once, use get_folder_by_tree with tree.'.format(folder_name))
 
         folder_id = self._loop_folder_finder(folder_name, o.folder_structure, return_id=True)
 
@@ -193,9 +193,7 @@ if __name__ == '__main__':
 
     o = Outlook()
 
-    folder_object = o.find_folder_by_name('GC1')
-
-    folder_object = o.get_folder_by_name(('Outlook Data File', 'P1', 'C1', 'GC1'))
+    folder_object = o.get_folder_by_tree(('Outlook Data File', 'P1', 'C1', 'GC1'))
 
     print(folder_object.Name)
     for x in range(folder_object.Items.Count, 0, -1):
