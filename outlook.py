@@ -1,5 +1,12 @@
 import win32com.client
-from exceptions import FolderNotFoundException, TooManyFoldersFoundException
+
+
+class FolderNotFoundException(Exception):
+    pass
+
+
+class TooManyFoldersFoundException(Exception):
+    pass
 
 
 class Outlook:
